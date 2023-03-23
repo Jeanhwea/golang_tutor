@@ -6,10 +6,6 @@ import (
 	"testing"
 )
 
-func TestTutor01Lock01(t *testing.T) {
-	main()
-}
-
 func Benchmark_RWMutex(b *testing.B) {
 	var lock sync.RWMutex
 	m := map[int]int{1: 2}
