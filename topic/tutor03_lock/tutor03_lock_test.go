@@ -1,4 +1,4 @@
-package tutor01_lock
+package tutor03_lock
 
 import (
 	"sync"
