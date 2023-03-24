@@ -6,6 +6,17 @@ import (
 	"testing"
 )
 
+func Benchmark_Mutex(b *testing.B) {
+	var lock sync.Mutex
+	m := map[int]int{1: 2}
+
+	for i := 0; i < b.N; i++ {
+		lock.Lock()
+		_ = m[1]
+		lock.Unlock()
+	}
+}
+
 func Benchmark_RWMutex(b *testing.B) {
 	var lock sync.RWMutex
 	m := map[int]int{1: 2}
@@ -25,6 +36,19 @@ func Benchmark_Atomic(b *testing.B) {
 		m := ptr.Load().(map[int]int)
 		_ = m[1]
 	}
+}
+
+func Benchmark_Mutex_parallel(b *testing.B) {
+	var lock sync.Mutex
+	m := map[int]int{1: 2}
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			lock.Lock()
+			_ = m[1]
+			lock.Unlock()
+		}
+	})
 }
 
 func Benchmark_RWMutex_parallel(b *testing.B) {

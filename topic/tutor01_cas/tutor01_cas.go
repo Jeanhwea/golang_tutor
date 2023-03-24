@@ -10,4 +10,5 @@ var (
 
 func main() {
 	atomic.AddInt64(&readCounter, 1)
+	atomic.AddInt64(&readCounter, 1)
 }

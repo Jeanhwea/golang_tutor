@@ -37,14 +37,34 @@ func TestTutor02Parallel03(t *testing.T) {
 	t.Log(counter)
 }
 
+func add() {
+	// mu.lock op1() lock .....
+	// ss => ss
+	// mu.lock op2()
+
+	// clean() unlock
+}
+
 func TestTutor02Parallel04(t *testing.T) {
 	var counter int64
 	var mu sync.Mutex
 	for i := 0; i < 1000; i++ {
 		go func() {
 			mu.Lock()
+			defer mu.Unlock()
+
+			// op1()
+			// ...
+			// op2()
+			// ...
+
+			// mu.lock()
+			// ... op2.0( ..net wait.. ) => wait
+			// mu.unlock()
+
+			// ... op2.1( ..net wait.. )
+
 			counter = counter + 10
-			mu.Unlock()
 		}()
 	}
 	time.Sleep(3 * time.Second)

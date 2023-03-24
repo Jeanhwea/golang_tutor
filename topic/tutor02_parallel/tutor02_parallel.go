@@ -8,7 +8,6 @@ import (
 
 func main() {
 	runtime.GOMAXPROCS(1)
-
 	fmt.Println("The program starts ...")
 
 	go func() {
