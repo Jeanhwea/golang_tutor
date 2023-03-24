@@ -1,3 +1,3 @@
-go build
-go tool objdump tutor01_cas > /tmp/dump-cas-by-gotool.asm
-objdump -d tutor01_cas      > /tmp/dump-cas-by-objdump.asm
+go build -o a.out
+go tool objdump a.out > /tmp/dump-cas-by-gotool.asm
+objdump -d a.out      > /tmp/dump-cas-by-objdump.asm
