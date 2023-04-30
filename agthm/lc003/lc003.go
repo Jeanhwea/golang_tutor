@@ -8,15 +8,15 @@ func lengthOfLongestSubstring(s string) (ans int) {
 		for ; j < n; j++ {
 			// fmt.Printf("i=%v, j=%v, substr=%v\n", i, j, s[i:j])
 			if ok := m[s[j]]; ok {
-				ans = max(ans, j-i)
 				break
-			} else {
-				m[s[j]] = true
 			}
+			m[s[j]] = true
 		}
 
+		if j-i > ans {
+			ans = j - i
+		}
 		if j == n {
-			ans = max(ans, j-i)
 			return
 		}
 
@@ -25,11 +25,4 @@ func lengthOfLongestSubstring(s string) (ans int) {
 	}
 
 	return
-}
-
-func max(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }
