@@ -17,6 +17,7 @@ func Test_LC005_02(t *testing.T) {
 }
 
 func Test_LC005_11(t *testing.T) {
-	s := "abc"
-	t.Log(s[0:2])
+	ss := [10][10]bool{}
+	ss[1][1] = true
+	t.Log(ss)
 }
