@@ -1,5 +1,10 @@
 package lc003
 
+// 无重复字符的最长子串
+//
+//   1. 使用双指针解法
+//   2. 用一个 map 保持当前字符串的所有字符, 用于提高查找效率
+//
 func lengthOfLongestSubstring(s string) (ans int) {
 	n := len(s)
 	m := make(map[byte]bool, 128) // 保存 s[i:j-1] 的字符
