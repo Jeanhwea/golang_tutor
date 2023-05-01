@@ -13,22 +13,22 @@ func threeSum(nums []int) (ans [][]int) {
 	n := len(nums)
 	sort.Ints(nums)
 
-	for i := 0; i < n-2; i++ {
-		if i > 0 && nums[i-1] == nums[i] {
+	for start := 0; start < n-2; start++ {
+		if start > 0 && nums[start-1] == nums[start] {
 			continue
 		}
 
-		target := -nums[i]
-		for p, q := i+1, n-1; p < q; {
-			if nums[p]+nums[q] > target {
-				q--
-			} else if nums[p]+nums[q] < target {
-				p++
+		target := -nums[start]
+		for i, j := start+1, n-1; i < j; {
+			if nums[i]+nums[j] > target {
+				j--
+			} else if nums[i]+nums[j] < target {
+				i++
 			} else {
-				ans = append(ans, []int{nums[i], nums[p], nums[q]})
-				p++
-				for p < q && nums[p-1] == nums[p] {
-					p++
+				ans = append(ans, []int{nums[start], nums[i], nums[j]})
+				i++
+				for i < j && nums[i-1] == nums[i] {
+					i++
 				}
 			}
 		}
