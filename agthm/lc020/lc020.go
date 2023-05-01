@@ -15,18 +15,18 @@ func isValid(s string) (ans bool) {
 	for _, ch := range []byte(s) {
 		switch ch {
 		case '(', '[', '{':
-			stack = append(stack, ch)
+			stack = append(stack, ch) // push
 		case ')', ']', '}':
 			if len(stack) <= 0 {
 				ans = false
 				return
 			}
-			top := stack[len(stack)-1]
+			top := stack[len(stack)-1] // getTop
 			if top != match[ch] {
 				ans = false
 				return
 			}
-			stack = stack[0 : len(stack)-1]
+			stack = stack[0 : len(stack)-1] // pop
 		}
 	}
 
