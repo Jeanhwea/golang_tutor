@@ -5,8 +5,8 @@ package lc005
 //  动态规划解法:
 //    dp[i,j] = true/false, 表示 s[i:j+1] 是否是回文串
 //
-//    dp[i,j] = dp[i+1,j-1] && s[i] == s[j]
-//            | true iff i==j
+//    dp[i,j] := dp[i+1,j-1] && s[i] == s[j]
+//            |= true iff i==j
 //
 func longestPalindrome(s string) (ans string) {
 	n := len(s)
