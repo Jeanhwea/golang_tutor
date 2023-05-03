@@ -1,9 +1,9 @@
 # 创建一个编写代码的文件
 
-num="001"
+num="0001"
 
 if [ $# -gt 0 ]; then
-    num=$(printf %03d $1)
+    num=$(printf %04d $1)
 fi
 
 # 源代码文件
