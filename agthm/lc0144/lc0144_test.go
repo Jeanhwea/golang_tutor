@@ -1,11 +1,21 @@
 package lc0144
 
 import (
-    "testing"
-
-    "github.com/stretchr/testify/assert"
+	"testing"
 )
 
 func Test_LC0144_01(t *testing.T) {
-    assert.Equal(t, true, true)
+	root := &TreeNode{
+		Val: 3,
+		Left: &TreeNode{
+			Val: 9,
+		},
+		Right: &TreeNode{
+			Val:   20,
+			Left:  &TreeNode{Val: 15},
+			Right: &TreeNode{Val: 7},
+		},
+	}
+	ans := preorderTraversal(root)
+	t.Log(ans)
 }
