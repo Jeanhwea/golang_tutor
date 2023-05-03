@@ -1,4 +1,4 @@
-package lc103
+package lc0103
 
 type TreeNode struct {
 	Val         int

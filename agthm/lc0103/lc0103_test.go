@@ -1,10 +1,10 @@
-package lc103
+package lc0103
 
 import (
 	"testing"
 )
 
-func Test_LC103_01(t *testing.T) {
+func Test_LC0103_01(t *testing.T) {
 	root := &TreeNode{
 		Val: 3,
 		Left: &TreeNode{

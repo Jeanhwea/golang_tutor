@@ -1,4 +1,4 @@
-package lc020
+package lc0020
 
 // 有效的括号
 //

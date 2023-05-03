@@ -1,4 +1,4 @@
-package lc022
+package lc0022
 
 // 括号生成
 //

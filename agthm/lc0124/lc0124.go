@@ -1,4 +1,4 @@
-package lc124
+package lc0124
 
 import "math"
 

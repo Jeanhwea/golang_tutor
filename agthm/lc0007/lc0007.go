@@ -1,4 +1,4 @@
-package lc007
+package lc0007
 
 func reverse(x int) (ans int) {
 	for x != 0 {

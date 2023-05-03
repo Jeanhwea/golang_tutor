@@ -1,4 +1,4 @@
-package lc064
+package lc0064
 
 // 最小路径和
 //  采用动态规划的解法

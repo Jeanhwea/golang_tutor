@@ -1,4 +1,4 @@
-package lc124
+package lc0124
 
 import (
 	"testing"
@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_LC124_01(t *testing.T) {
+func Test_LC0124_01(t *testing.T) {
 	root := &TreeNode{
 		Val:  -10,
 		Left: &TreeNode{Val: 9},
@@ -20,7 +20,7 @@ func Test_LC124_01(t *testing.T) {
 	assert.Equal(t, 42, ans)
 }
 
-func Test_LC124_02(t *testing.T) {
+func Test_LC0124_02(t *testing.T) {
 	root := &TreeNode{
 		Val:  9,
 		Left: &TreeNode{Val: 6},

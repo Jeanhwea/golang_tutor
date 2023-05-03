@@ -1,4 +1,4 @@
-package lc088
+package lc0088
 
 // 合并两个有序数组
 //

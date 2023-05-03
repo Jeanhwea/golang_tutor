@@ -1,4 +1,4 @@
-package lc021
+package lc0021
 
 import (
 	"testing"
@@ -24,17 +24,17 @@ func sliceList(head *ListNode) (vals []int) {
 	return
 }
 
-func Test_LC021_11(t *testing.T) {
+func Test_LC0021_11(t *testing.T) {
 	ans := makeList([]int{1, 2, 3})
 	t.Log(sliceList(ans))
 }
 
-func Test_LC021_12(t *testing.T) {
+func Test_LC0021_12(t *testing.T) {
 	ans := makeList(nil)
 	t.Log(sliceList(ans))
 }
 
-func Test_LC021_01(t *testing.T) {
+func Test_LC0021_01(t *testing.T) {
 	l1 := makeList([]int{1, 2, 4})
 	l2 := makeList([]int{1, 3, 4})
 	ans := mergeTwoLists(l1, l2)

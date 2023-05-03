@@ -1,4 +1,4 @@
-package lc005
+package lc0005
 
 // 最长回文串
 //

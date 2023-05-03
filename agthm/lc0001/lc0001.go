@@ -1,6 +1,6 @@
 // https://leetcode.cn/problems/two-sum/
 
-package lc001
+package lc0001
 
 func twoSum(nums []int, target int) (ans []int) {
 	cache := make(map[int]int)

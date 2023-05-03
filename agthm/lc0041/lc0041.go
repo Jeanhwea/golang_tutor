@@ -1,4 +1,4 @@
-package lc041
+package lc0041
 
 // 缺失的第一个正数
 //

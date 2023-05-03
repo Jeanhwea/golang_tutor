@@ -1,4 +1,4 @@
-package lc064
+package lc0064
 
 import (
 	"testing"
@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_LC064_01(t *testing.T) {
+func Test_LC0064_01(t *testing.T) {
 	grid := [][]int{
 		{1, 3, 1},
 		{1, 5, 1},

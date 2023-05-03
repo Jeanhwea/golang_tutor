@@ -1,4 +1,4 @@
-package lc003
+package lc0003
 
 // 无重复字符的最长子串
 //

@@ -1,4 +1,4 @@
-package lc033
+package lc0033
 
 // 搜索旋转排序数组
 //

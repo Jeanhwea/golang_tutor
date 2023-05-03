@@ -1,10 +1,10 @@
-package lc088
+package lc0088
 
 import (
 	"testing"
 )
 
-func Test_LC088_01(t *testing.T) {
+func Test_LC0088_01(t *testing.T) {
 	nums1 := []int{1, 2, 3, 0, 0, 0}
 	m, n := 3, 3
 	nums2 := []int{2, 5, 6}
