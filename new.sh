@@ -6,11 +6,28 @@ if [ $# -gt 0 ]; then
     num=$(printf %03d $1)
 fi
 
+# 源代码文件
+file="$PWD/agthm/lc${num}/lc${num}.go"
 
-file="./agthm/lc${num}/lc${num}.go"
+# 检查文件是否存在
+if [ -f "$file" ]; then
+    echo "file already exists:\n  $file"
+    exit 0
+fi
 
-mkdir -p $(dirname $file)
+# 新建包
+pkg=$(dirname $file)
 
+if [ ! -d "$pkg" ]; then
+    mkdir -p $(dirname $file)
+    echo "create package:\n  $pkg"
+fi
+
+# 测试文件
+test=${file/.go/_test.go}
+
+# 创建文件
 echo "package lc${num}" > $file
+echo "package lc${num}" > $test
 
-echo "create $file"
+echo "create file:\n  $file\n  $test"
