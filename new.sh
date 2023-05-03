@@ -19,7 +19,7 @@ fi
 pkg=$(dirname $file)
 
 if [ ! -d "$pkg" ]; then
-    mkdir -p $(dirname $file)
+    mkdir -p $pkg
     echo "create package:\n  $pkg"
 fi
 
