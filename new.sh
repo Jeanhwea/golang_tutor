@@ -23,11 +23,42 @@ if [ ! -d "$pkg" ]; then
     echo "create package:\n  $pkg"
 fi
 
-# 测试文件
+# 创建 Model
+model="${pkg}/model.go"
+cat << EOF > $model
+package lc${num}
+
+type ListNode struct {
+    Val  int
+    Next *ListNode
+}
+
+type TreeNode struct {
+    Val   int
+    Left  *TreeNode
+    Right *TreeNode
+}
+EOF
+
+# 创建代码文件
+cat << EOF > $file
+package lc${num}
+EOF
+
+# 创建测试用例
 test=${file/.go/_test.go}
+cat << EOF > $test
+package lc${num}
 
-# 创建文件
-echo "package lc${num}" > $file
-echo "package lc${num}" > $test
+import (
+    "testing"
 
-echo "create file:\n  $file\n  $test"
+    "github.com/stretchr/testify/assert"
+)
+
+func Test_LC${num}_01(t *testing.T) {
+    assert.Equal(t, true, true)
+}
+EOF
+
+echo "create file:\n  $model\n  $file\n  $test"
