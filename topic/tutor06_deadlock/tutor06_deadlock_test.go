@@ -33,4 +33,10 @@ func TestTutor06Deadlock03(t *testing.T) {
 func TestTutor06Deadlock10(t *testing.T) {
 	gid := GetGid()
 	t.Log(gid)
+	for i := 0; i < 10; i++ {
+		go func() {
+			t.Log(GetGid())
+		}()
+	}
+	time.Sleep(time.Second)
 }
