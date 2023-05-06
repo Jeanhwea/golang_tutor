@@ -1,5 +1,6 @@
 package nc0001
 
+// BM1 翻转链表
 func ReverseList(head *ListNode) (ans *ListNode) {
 	dummy := &ListNode{}
 	tail := dummy.Next
