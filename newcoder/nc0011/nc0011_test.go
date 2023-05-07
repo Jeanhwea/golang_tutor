@@ -4,13 +4,12 @@ import (
 	"testing"
 
 	. "github.com/jeanhwea/golang_tutor/common/model"
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_NC0011_01(t *testing.T) {
 	a := NewListNode([]int{2, 3})
 	b := NewListNode([]int{8, 8})
-	t.Log(a)
-	t.Log(b)
 	ans := addInList(a, b)
-	t.Log(ans)
+	assert.Equal(t, []int{1, 1, 1}, ans.ToSlice())
 }

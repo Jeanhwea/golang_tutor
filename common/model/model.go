@@ -7,6 +7,17 @@ type ListNode struct {
 	Next *ListNode
 }
 
+func NewListNode(values []int) (head *ListNode) {
+	dummy := &ListNode{}
+	tail := dummy
+	for _, v := range values {
+		curr := &ListNode{Val: v}
+		tail, tail.Next = curr, curr
+	}
+	head = dummy.Next
+	return
+}
+
 func (l *ListNode) String() (ans string) {
 	var values []int
 	for ; l != nil; l = l.Next {
@@ -16,14 +27,10 @@ func (l *ListNode) String() (ans string) {
 	return
 }
 
-func NewListNode(values []int) (head *ListNode) {
-	dummy := &ListNode{}
-	tail := dummy
-	for _, v := range values {
-		curr := &ListNode{Val: v}
-		tail, tail.Next = curr, curr
+func (l *ListNode) ToSlice() (values []int) {
+	for ; l != nil; l = l.Next {
+		values = append(values, l.Val)
 	}
-	head = dummy.Next
 	return
 }
 
