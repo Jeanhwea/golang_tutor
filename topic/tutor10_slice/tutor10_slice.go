@@ -2,6 +2,8 @@ package main
 
 import "fmt"
 
+// go build -o a.out
+// ./a.out < in.txt
 func main() {
 	var n int
 	nums := [10]int{}
