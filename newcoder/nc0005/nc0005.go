@@ -4,7 +4,7 @@ import (
 	. "github.com/jeanhwea/golang_tutor/common/model"
 )
 
-// 合并 K 哥有序链表
+// 合并 K 个有序链表
 func mergeKLists(lists []*ListNode) (ans *ListNode) {
 	return doMerge(lists, 0, len(lists)-1)
 }
