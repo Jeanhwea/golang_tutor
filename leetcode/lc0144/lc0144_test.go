@@ -1,8 +1,9 @@
 package lc0144
 
 import (
-	. "github.com/jeanhwea/golang_tutor/common/model"
 	"testing"
+
+	. "github.com/jeanhwea/golang_tutor/common/model"
 )
 
 func Test_LC0144_01(t *testing.T) {

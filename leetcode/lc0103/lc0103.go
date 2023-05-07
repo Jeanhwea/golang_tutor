@@ -30,7 +30,7 @@ func zigzagLevelOrder(root *TreeNode) (ans [][]int) {
 			vals = append(vals, node.Val)
 		}
 
-		if level % 2 == 1 {
+		if level%2 == 1 {
 			for i, j := 0, len(vals)-1; i < j; i, j = i+1, j-1 {
 				vals[i], vals[j] = vals[j], vals[i]
 			}

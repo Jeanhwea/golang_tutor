@@ -15,5 +15,5 @@ func Test_LC0007_01(t *testing.T) {
 func Test_LC0007_11(t *testing.T) {
 	t.Log(math.MinInt32)
 	t.Log(math.MaxInt32)
-	t.Log(-8%10)
+	t.Log(-8 % 10)
 }

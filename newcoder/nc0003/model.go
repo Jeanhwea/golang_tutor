@@ -1,12 +1,12 @@
 package nc0003
 
 type ListNode struct {
-    Val  int
-    Next *ListNode
+	Val  int
+	Next *ListNode
 }
 
 type TreeNode struct {
-    Val   int
-    Left  *TreeNode
-    Right *TreeNode
+	Val   int
+	Left  *TreeNode
+	Right *TreeNode
 }

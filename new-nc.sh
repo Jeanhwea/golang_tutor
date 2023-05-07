@@ -39,9 +39,9 @@ cat << EOF > $test
 package nc${num}
 
 import (
-    . "github.com/jeanhwea/golang_tutor/common/model"
     "testing"
 
+    . "github.com/jeanhwea/golang_tutor/common/model"
     "github.com/stretchr/testify/assert"
 )
 
