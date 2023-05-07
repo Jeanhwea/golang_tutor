@@ -1,5 +1,9 @@
 package lc0144
 
+import (
+	. "github.com/jeanhwea/golang_tutor/common/model"
+)
+
 func preorderTraversal(root *TreeNode) (ans []int) {
 	if root == nil {
 		return
