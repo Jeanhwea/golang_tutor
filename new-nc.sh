@@ -7,7 +7,7 @@ if [ $# -gt 0 ]; then
 fi
 
 # 源代码文件
-file="$PWD/ncode/nc${num}/nc${num}.go"
+file="$PWD/newcoder/nc${num}/nc${num}.go"
 
 # 检查文件是否存在
 if [ -f "$file" ]; then
@@ -24,7 +24,7 @@ if [ ! -d "$pkg" ]; then
 fi
 
 # 创建 Model
-model="${pkg}/model.go"
+common="${pkg}/model.go"
 cat << EOF > $model
 package nc${num}
 
