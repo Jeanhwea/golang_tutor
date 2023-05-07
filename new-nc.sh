@@ -23,26 +23,14 @@ if [ ! -d "$pkg" ]; then
     echo "create package:\n  $pkg"
 fi
 
-# 创建 Model
-common="${pkg}/model.go"
-cat << EOF > $model
-package nc${num}
-
-type ListNode struct {
-    Val  int
-    Next *ListNode
-}
-
-type TreeNode struct {
-    Val   int
-    Left  *TreeNode
-    Right *TreeNode
-}
-EOF
 
 # 创建代码文件
 cat << EOF > $file
 package nc${num}
+
+import (
+    . "github.com/jeanhwea/golang_tutor/common/model"
+)
 EOF
 
 # 创建测试用例
@@ -51,6 +39,7 @@ cat << EOF > $test
 package nc${num}
 
 import (
+    . "github.com/jeanhwea/golang_tutor/common/model"
     "testing"
 
     "github.com/stretchr/testify/assert"
@@ -61,4 +50,4 @@ func Test_NC${num}_01(t *testing.T) {
 }
 EOF
 
-echo "create file:\n  $model\n  $file\n  $test"
+echo "create file:\n  $file\n  $test"
