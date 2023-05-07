@@ -11,7 +11,7 @@ file="$PWD/newcoder/nc${num}/nc${num}.go"
 
 # 检查文件是否存在
 if [ -f "$file" ]; then
-    echo "file already exists:\n  $file"
+    printf "file already exists:\n  $file\n"
     exit 0
 fi
 
@@ -20,7 +20,7 @@ pkg=$(dirname $file)
 
 if [ ! -d "$pkg" ]; then
     mkdir -p $pkg
-    echo "create package:\n  $pkg"
+    printf "create package:\n  $pkg\n"
 fi
 
 
@@ -50,4 +50,4 @@ func Test_NC${num}_01(t *testing.T) {
 }
 EOF
 
-echo "create file:\n  $file\n  $test"
+printf "create file:\n  $file\n  $test\n"
