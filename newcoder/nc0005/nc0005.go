@@ -8,6 +8,7 @@ func mergeKLists(lists []*ListNode) (ans *ListNode) {
 	return doMerge(lists, 0, len(lists)-1)
 }
 
+// 归并排序, 对数组下标进行归并
 func doMerge(lists []*ListNode, left, right int) (out *ListNode) {
 	if left > right {
 		return
