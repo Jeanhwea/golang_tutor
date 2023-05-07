@@ -19,6 +19,7 @@ func merge(head *ListNode, n int) (out *ListNode) {
 		return head
 	}
 
+	// 备注: 这里寻找中点也可以使用快慢指针来做
 	left, right := head, head
 	for i := 1; i < n/2; i++ {
 		right = right.Next
