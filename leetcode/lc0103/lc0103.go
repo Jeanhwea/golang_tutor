@@ -1,9 +1,8 @@
 package lc0103
 
-type TreeNode struct {
-	Val         int
-	Left, Right *TreeNode
-}
+import (
+	. "github.com/jeanhwea/golang_tutor/common/model"
+)
 
 // 二叉树的锯齿形层序遍历
 //

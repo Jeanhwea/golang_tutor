@@ -1,11 +1,10 @@
 package lc0124
 
-import "math"
+import (
+	"math"
 
-type TreeNode struct {
-	Val         int
-	Left, Right *TreeNode
-}
+	. "github.com/jeanhwea/golang_tutor/common/model"
+)
 
 // 二叉树中的最大路径和
 //

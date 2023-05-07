@@ -3,6 +3,7 @@ package lc0124
 import (
 	"testing"
 
+	. "github.com/jeanhwea/golang_tutor/common/model"
 	"github.com/stretchr/testify/assert"
 )
 

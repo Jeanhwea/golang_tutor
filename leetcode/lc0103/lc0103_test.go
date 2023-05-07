@@ -2,6 +2,8 @@ package lc0103
 
 import (
 	"testing"
+
+	. "github.com/jeanhwea/golang_tutor/common/model"
 )
 
 func Test_LC0103_01(t *testing.T) {
