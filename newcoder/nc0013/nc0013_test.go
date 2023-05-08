@@ -1,12 +1,13 @@
 package nc0013
 
 import (
-    "testing"
+	"testing"
 
-    . "github.com/jeanhwea/golang_tutor/common/model"
-    "github.com/stretchr/testify/assert"
+	. "github.com/jeanhwea/golang_tutor/common/model"
+	"github.com/stretchr/testify/assert"
 )
 
 func Test_NC0013_01(t *testing.T) {
-    assert.Equal(t, true, true)
+	root := NewListNode([]int{1, 2, 1})
+	assert.Equal(t, true, isPail(root))
 }

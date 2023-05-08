@@ -9,7 +9,7 @@ func isPail(head *ListNode) (ans bool) {
 	var reverse *ListNode
 	for p := head; p != nil; p = p.Next {
 		curr := &ListNode{Val: p.Val}
-		reverse, curr.Next = curr, p
+		reverse, curr.Next = curr, reverse
 	}
 
 	for p, q := head, reverse; p != nil && q != nil; p, q = p.Next, q.Next {
