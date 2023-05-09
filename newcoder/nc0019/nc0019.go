@@ -1,11 +1,17 @@
 package nc0019
 
-import (
-	. "github.com/jeanhwea/golang_tutor/common/model"
-)
-
 // 寻找峰值: 也可以使用二分法: 如 nums[mid] < nums[mid+1]
 func findPeakElement(nums []int) (ans int) {
+	left, right := 0, len(nums)-1
+	for left < right {
+		mid := left + (right-left)/2
+		if nums[mid] < nums[mid+1] {
+			left = mid + 1
+		} else {
+			right = mid
+		}
+	}
+	ans = left
 	return
 }
 
