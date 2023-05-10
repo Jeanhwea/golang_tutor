@@ -2,6 +2,8 @@ package lc0094
 
 import (
 	"testing"
+
+	. "github.com/jeanhwea/golang_tutor/common/model"
 )
 
 func Test_LC0094_01(t *testing.T) {
