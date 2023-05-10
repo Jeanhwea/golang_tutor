@@ -1,9 +1,5 @@
 package nc0017
 
-import (
-	. "github.com/jeanhwea/golang_tutor/common/model"
-)
-
 // 二分查找-I
 func search(nums []int, target int) (ans int) {
 	left, right := 0, len(nums)-1

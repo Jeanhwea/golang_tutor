@@ -1,5 +1,9 @@
 package nc0002
 
+import (
+	. "github.com/jeanhwea/golang_tutor/common/model"
+)
+
 // BM2 链表内指定区间反转
 func reverseBetween(head *ListNode, m int, n int) (ans *ListNode) {
 	dummy := &ListNode{

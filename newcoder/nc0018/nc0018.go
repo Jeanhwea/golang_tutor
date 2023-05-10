@@ -1,9 +1,5 @@
 package nc0018
 
-import (
-	. "github.com/jeanhwea/golang_tutor/common/model"
-)
-
 // 二维数组中的查找
 func Find(target int, array [][]int) (ans bool) {
 	n, m := len(array), len(array[0])
