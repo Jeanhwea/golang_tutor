@@ -5,9 +5,6 @@ import (
 )
 
 func preorderTraversal(root *TreeNode) (vals []int) {
-	if root == nil {
-		return
-	}
 	stack := []*TreeNode{}
 	for root != nil || len(stack) > 0 {
 		if root == nil {
