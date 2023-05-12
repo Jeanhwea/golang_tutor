@@ -1,6 +1,8 @@
 package model
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type ListNode struct {
 	Val  int
@@ -17,7 +19,6 @@ func NewListNode(values []int) (head *ListNode) {
 	head = dummy.Next
 	return
 }
-
 func (l *ListNode) String() (ans string) {
 	var values []int
 	for ; l != nil; l = l.Next {
@@ -26,16 +27,9 @@ func (l *ListNode) String() (ans string) {
 	ans = fmt.Sprintf("%v", values)
 	return
 }
-
 func (l *ListNode) ToSlice() (values []int) {
 	for ; l != nil; l = l.Next {
 		values = append(values, l.Val)
 	}
 	return
-}
-
-type TreeNode struct {
-	Val   int
-	Left  *TreeNode
-	Right *TreeNode
 }
