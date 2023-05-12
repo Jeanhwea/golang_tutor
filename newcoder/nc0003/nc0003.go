@@ -1,5 +1,9 @@
 package nc0003
 
+import (
+	. "github.com/jeanhwea/golang_tutor/common/model"
+)
+
 // K 个链表一组翻转
 func reverseKGroup(head *ListNode, k int) *ListNode {
 	dummy := &ListNode{Next: head}

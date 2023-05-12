@@ -1,5 +1,9 @@
 package nc0001
 
+import (
+	. "github.com/jeanhwea/golang_tutor/common/model"
+)
+
 // BM1 翻转链表
 func ReverseList(head *ListNode) (ans *ListNode) {
 	dummy := &ListNode{}

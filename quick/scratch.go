@@ -1,6 +1,7 @@
-package quick
+package main
 
-func add(a, b int) (ans int) {
-	ans = a + b
-	return
+import "fmt"
+
+func main() {
+	fmt.Println("hello")
 }

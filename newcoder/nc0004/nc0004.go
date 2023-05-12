@@ -1,5 +1,9 @@
 package nc0004
 
+import (
+	. "github.com/jeanhwea/golang_tutor/common/model"
+)
+
 func Merge(pHead1 *ListNode, pHead2 *ListNode) (ans *ListNode) {
 	dummy := &ListNode{}
 	tail := dummy
@@ -10,7 +14,7 @@ func Merge(pHead1 *ListNode, pHead2 *ListNode) (ans *ListNode) {
 		} else {
 			pHead2 = pHead2.Next
 		}
-		tail.Next, tail, curr = curr, curr, curr.Next
+		tail.Next, tail = curr, curr
 	}
 
 	if pHead1 != nil {
