@@ -14,7 +14,7 @@ func postorderTraversal(root *TreeNode) (vals []int) {
 			root = root.Left
 		}
 		peek := stack[len(stack)-1]
-		if peek.Right == nil || peek.Right == prev { // 这里 peek 的左子树都遍历过了
+		if peek.Right == nil || peek.Right == prev { // 这里 peek 的左子树都已经遍历过
 			vals = append(vals, peek.Val)
 			prev, stack = peek, stack[:len(stack)-1]
 		} else {
