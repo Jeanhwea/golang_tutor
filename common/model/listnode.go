@@ -19,6 +19,7 @@ func NewListNode(values []int) (head *ListNode) {
 	head = dummy.Next
 	return
 }
+
 func (l *ListNode) String() (ans string) {
 	var values []int
 	for ; l != nil; l = l.Next {
@@ -27,6 +28,7 @@ func (l *ListNode) String() (ans string) {
 	ans = fmt.Sprintf("%v", values)
 	return
 }
+
 func (l *ListNode) ToSlice() (values []int) {
 	for ; l != nil; l = l.Next {
 		values = append(values, l.Val)
