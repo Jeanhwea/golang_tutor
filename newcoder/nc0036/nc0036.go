@@ -4,39 +4,34 @@ import (
 	. "github.com/jeanhwea/golang_tutor/common/model"
 )
 
-func IsBalanced_Solution(root *TreeNode) bool {
-	memo = make(map[*TreeNode]int)
-	return isBalanced(root)
+func IsBalanced_Solution(root *TreeNode) (ans bool) {
+	_, ans = isBalanced(root)
+	return
 }
 
-func isBalanced(root *TreeNode) (balanced bool) {
+func isBalanced(root *TreeNode) (height int, balanced bool) {
 	if root == nil {
 		balanced = true
 		return
 	}
-	diff := abs(getHeight(root.Left) - getHeight(root.Right))
-	if diff > 1 {
+	heightL, ok := isBalanced(root.Left)
+	if !ok {
 		balanced = false
 		return
 	}
-	balanced = isBalanced(root.Left) && isBalanced(root.Right)
-	return
-}
-
-var (
-	memo map[*TreeNode]int
-)
-
-func getHeight(root *TreeNode) (height int) {
-	if root == nil {
+	heightR, ok := isBalanced(root.Right)
+	if !ok {
+		balanced = false
 		return
 	}
-	if h, ok := memo[root]; ok {
-		height = h
+	diff := heightL - heightR
+	if diff > 1 || diff < -1 {
+		balanced = false
 		return
 	}
-	height = max(getHeight(root.Left), getHeight(root.Right)) + 1
-	memo[root] = height
+
+	height = max(heightL, heightR) + 1
+	balanced = true
 	return
 }
 
@@ -45,11 +40,4 @@ func max(a, b int) int {
 		return a
 	}
 	return b
-}
-
-func abs(a int) int {
-	if a > 0 {
-		return a
-	}
-	return -a
 }
