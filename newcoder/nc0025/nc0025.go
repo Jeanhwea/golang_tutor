@@ -6,7 +6,7 @@ import (
 
 // 后序遍历
 func postorderTraversal(root *TreeNode) (vals []int) {
-	stack := []*TreeNode{}
+	var stack []*TreeNode
 	var prev *TreeNode
 	for root != nil || len(stack) > 0 {
 		for root != nil {
