@@ -9,6 +9,7 @@ func eval(s string, index int) (val, i int) {
 	var opts []byte // 操作符栈
 	var nums []int  // 操作数
 
+	// 尝试添加数字, 如果操作符栈顶是 * ，高优先级的数字可以直接计算结果后压栈
 	pushNumber := func(num int) {
 		if len(opts) > 0 && opts[len(opts)-1] == '*' {
 			lhs := nums[len(nums)-1]
