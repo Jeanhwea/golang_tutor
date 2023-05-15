@@ -27,7 +27,7 @@ outter:
 		case '(': // 如果遇到左括号需要递归处理
 			num, i = eval(s, i+1)
 			if s[i] != ')' {
-				panic("right parenthesis miss match!")
+				panic("missing right parenthesis!")
 			}
 			pushNumber(num)
 		case ')': // 右括号跳出解析
