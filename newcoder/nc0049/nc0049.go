@@ -35,6 +35,9 @@ outter:
 			break outter
 		case '+', '-', '*':
 			opts = append(opts, ch)
+			if ch == '-' && len(nums) == 0 {
+				nums = append(nums, 0)
+			}
 		case ' ':
 			continue
 		default: // 解析数字

@@ -29,3 +29,7 @@ func Test_NC0049_05(t *testing.T) {
 func Test_NC0049_06(t *testing.T) {
 	assert.Equal(t, -10, solve("(2*(3-4))*5"))
 }
+
+func Test_NC0049_07(t *testing.T) {
+	assert.Equal(t, -10, solve("-10"))
+}
