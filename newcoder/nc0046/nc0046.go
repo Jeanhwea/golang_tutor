@@ -1,5 +1,6 @@
 package nc0046
 
+// 最小的 K 个数
 func GetLeastNumbers_Solution(input []int, k int) (ans []int) {
 	var heap IntHeap
 	for i, num := range input {
