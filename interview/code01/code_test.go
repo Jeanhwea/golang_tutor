@@ -1,6 +1,7 @@
 package code01
 
 import (
+	"sync"
 	"testing"
 )
 
@@ -37,4 +38,8 @@ func dfs(digits []string) (ans []string) {
 	}
 
 	return
+}
+
+func TestCode01(t *testing.T) {
+	var sp sync.Pool
 }
