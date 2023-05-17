@@ -16,10 +16,10 @@ func permuteUnique(nums []int) (ans [][]int) {
 	return ans
 }
 
-func perm(ans *[][]int, nums []int, temp []int, visited []int) {
-	if len(temp) == len(nums) {
-		vals := make([]int, len(temp))
-		copy(vals, temp)
+func perm(ans *[][]int, nums []int, choose []int, visited []int) {
+	if len(choose) == len(nums) {
+		vals := make([]int, len(choose))
+		copy(vals, choose)
 		*ans = append(*ans, vals)
 		return
 	}
@@ -32,9 +32,9 @@ func perm(ans *[][]int, nums []int, temp []int, visited []int) {
 			continue
 		}
 		visited[i] = 1
-		temp = append(temp, nums[i])
-		perm(ans, nums, temp, visited)
+		choose = append(choose, nums[i])
+		perm(ans, nums, choose, visited)
 		visited[i] = 0
-		temp = temp[:len(temp)-1]
+		choose = choose[:len(choose)-1]
 	}
 }
