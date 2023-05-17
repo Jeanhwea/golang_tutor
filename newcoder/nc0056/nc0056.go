@@ -9,14 +9,14 @@ func permuteUnique(nums []int) (ans [][]int) {
 		return [][]int{}
 	}
 	sort.Ints(nums)
-	vis := make([]int, len(nums))
+	visited := make([]bool, len(nums))
 	ans = [][]int{}
 	temp := []int{}
-	perm(&ans, nums, temp, vis)
+	perm(&ans, nums, temp, visited)
 	return ans
 }
 
-func perm(ans *[][]int, nums []int, choose []int, visited []int) {
+func perm(ans *[][]int, nums []int, choose []int, visited []bool) {
 	if len(choose) == len(nums) {
 		vals := make([]int, len(choose))
 		copy(vals, choose)
@@ -25,16 +25,14 @@ func perm(ans *[][]int, nums []int, choose []int, visited []int) {
 	}
 
 	for i := 0; i < len(nums); i++ {
-		if visited[i] > 0 {
+		if visited[i] {
 			continue
 		}
-		if i > 0 && nums[i-1] == nums[i] && visited[i-1] == 0 {
+		if i > 0 && nums[i-1] == nums[i] && !visited[i-1] {
 			continue
 		}
-		visited[i] = 1
-		choose = append(choose, nums[i])
+		visited[i], choose = true, append(choose, nums[i])
 		perm(ans, nums, choose, visited)
-		visited[i] = 0
-		choose = choose[:len(choose)-1]
+		visited[i], choose = false, choose[:len(choose)-1]
 	}
 }
