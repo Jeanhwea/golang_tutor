@@ -1,5 +1,6 @@
 package nc0057
 
+// 岛屿数量
 func solve(grid [][]byte) (ans int) {
 	n, m := len(grid), len(grid[0])
 
