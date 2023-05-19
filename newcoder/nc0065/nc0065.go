@@ -4,6 +4,8 @@ package nc0065
 func LCS(s1 string, s2 string) (ans string) {
 	n, m := len(s1), len(s2)
 	dp := arr2d(n+1, m+1)
+
+	// 动规找出最优解
 	for i := 1; i <= n; i++ {
 		for j := 1; j <= m; j++ {
 			if s1[i-1] == s2[j-1] {
@@ -14,6 +16,7 @@ func LCS(s1 string, s2 string) (ans string) {
 		}
 	}
 
+	// 反向搜索获取到字符串序列
 	var str []byte
 	for i, j := n, m; dp[i][j] > 0; {
 		if s1[i-1] == s2[j-1] {
@@ -27,10 +30,10 @@ func LCS(s1 string, s2 string) (ans string) {
 		}
 	}
 
+	// reverse 得到结果字符串
 	for i, j := 0, len(str)-1; i < j; i, j = i+1, j-1 {
 		str[i], str[j] = str[j], str[i]
 	}
-
 	ans = string(str)
 	return
 }
