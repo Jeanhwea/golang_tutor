@@ -35,6 +35,10 @@ func LCS(s1 string, s2 string) (ans string) {
 		str[i], str[j] = str[j], str[i]
 	}
 	ans = string(str)
+
+	if ans == "" {
+		ans = "-1"
+	}
 	return
 }
 
