@@ -1,23 +1,30 @@
 package nc0066
 
-import (
-	"fmt"
-)
-
 // 最长公共子串
+
+// 动态规划: dp[i][j] 表示以 str1[i] 和 str2[j] 结尾的最长公共子串长度
 func LCS(str1 string, str2 string) (ans string) {
 	n, m := len(str1), len(str2)
+	dp := [5001][5001]int{}
+	maxlen, end := 0, 0
 	for i := 0; i < n; i++ {
 		for j := 0; j < m; j++ {
-			if str1[i] != str2[j] {
-				continue
+			if str1[i] == str2[j] {
+				if i-1 >= 0 && j-1 >= 0 {
+					dp[i][j] = dp[i-1][j-1] + 1
+				} else {
+					dp[i][j] = 1
+				}
+				// fmt.Printf("dp[i][j]: %v\n", dp[i][j])
 			}
-			len := 0
-			for ; i+len < n && j+len < m && str1[i+len] == str2[j+len]; len++ {
+			if dp[i][j] > maxlen {
+				maxlen = dp[i][j]
+				end = i
 			}
-			fmt.Printf("len=%v,  %v, %v\n", len, str1[i:i+len], str2[j:j+len])
 		}
 	}
+
+	ans = str1[end-maxlen+1 : end+1]
 	return
 }
 
