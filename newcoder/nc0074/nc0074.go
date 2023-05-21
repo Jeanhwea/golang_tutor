@@ -6,8 +6,8 @@ import (
 )
 
 func restoreIpAddresses(s string) (ans []string) {
-
 	var bfs func(curr []string, left string, level int)
+
 	bfs = func(curr []string, left string, level int) {
 		if len(left) <= 0 && level == 4 {
 			ans = append(ans, strings.Join(curr, "."))
