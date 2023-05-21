@@ -1,5 +1,6 @@
 package nc0071
 
+// 最长上升子序列 (一)
 func LIS(nums []int) (ans int) {
 	n := len(nums)
 	if n <= 0 {
