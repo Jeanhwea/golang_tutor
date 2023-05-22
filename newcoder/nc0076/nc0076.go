@@ -14,7 +14,7 @@ func match(str string, pat string) (ans bool) {
 			return false
 		}
 		return pat[0] == '.' || pat[0] == str[0]
-	default:
+	default: // m >= 2
 		if pat[1] == '*' {
 			if n == 0 {
 				return match(str, pat[2:])
