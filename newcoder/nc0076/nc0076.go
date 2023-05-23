@@ -47,6 +47,9 @@ func match2(str string, pat string) (ans bool) {
 	dp[0][0] = true
 
 	// 情形一: pat 为空, str 长度大于 0 都是 false
+	for i := 1; i <= n; i++ {
+		dp[i][0] = false
+	}
 
 	// 情形二: str 空, pat 长度大于 0
 	for j := 1; j <= m; j++ {
