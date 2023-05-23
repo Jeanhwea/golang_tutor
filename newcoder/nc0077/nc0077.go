@@ -40,10 +40,10 @@ func longestValidParentheses(s string) (ans int) {
 					dp[i] = 2
 				}
 			} else { // s[i-1] == ')'
-				left := i - dp[i-1] - 1
-				if left >= 0 && s[left] == '(' {
-					if left-1 >= 0 {
-						dp[i] = dp[left-1] + dp[i-1] + 2
+				j := i - dp[i-1] - 1
+				if j >= 0 && s[j] == '(' {
+					if j-1 >= 0 {
+						dp[i] = dp[j-1] + dp[i-1] + 2
 					} else {
 						dp[i] = dp[i-1] + 2
 					}
