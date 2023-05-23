@@ -40,7 +40,7 @@ func longestValidParentheses(s string) (ans int) {
 					dp[i] = 2
 				}
 			} else { // s[i-1] == ')'
-				j := i - dp[i-1] - 1
+				j := i - dp[i-1] - 1 // j 是跳过 s[i-1] 匹配的括号字串后的下标
 				if j >= 0 && s[j] == '(' {
 					if j-1 >= 0 {
 						dp[i] = dp[j-1] + dp[i-1] + 2
