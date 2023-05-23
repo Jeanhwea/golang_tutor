@@ -69,13 +69,19 @@ func match2(str string, pat string) (ans bool) {
 				if j-2 < 0 {
 					continue
 				}
+
+				// 忽略 x* 字符串, 可以得到第一 case
 				dp[i][j] = dp[i][j] || dp[i][j-2]
 
+				// 如果满足以下条件, 可能匹配 str[i-1] 或者忽略 str[i-1]
 				if pat[j-2] == '.' || pat[j-2] == str[i-1] {
 					dp[i][j] = dp[i][j] || dp[i-1][j-2] || dp[i-1][j]
 				}
 			} else if pat[j-1] == '.' || pat[j-1] == str[i-1] {
+				// 如果没有 * 字符, 则只需匹配一个字符
 				dp[i][j] = dp[i][j] || dp[i-1][j-1]
+			} else {
+				dp[i][j] = false
 			}
 		}
 	}
