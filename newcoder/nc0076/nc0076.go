@@ -37,3 +37,46 @@ func match(str string, pat string) (ans bool) {
 
 	return false
 }
+
+// 动规解法
+func match2(str string, pat string) (ans bool) {
+	n, m := len(str), len(pat)
+	dp := [27][27]bool{} // dp[i][j] 表示 str[0:i] 是否匹配 pat[0:j]
+
+	// pat 和 str 都为空结果为 true
+	dp[0][0] = true
+
+	// 情形一: pat 为空, str 长度大于 0 都是 false
+
+	// 情形二: str 空, pat 长度大于 0
+	for j := 1; j <= m; j++ {
+		if pat[j-1] == '*' {
+			if j == 2 {
+				dp[0][j] = true
+			} else {
+				dp[0][j] = dp[0][j-2]
+			}
+		}
+	}
+
+	// 迭代计算其它场景
+	for i := 1; i <= n; i++ {
+		for j := 1; j <= m; j++ {
+			if pat[j-1] == '*' {
+				if j-2 < 0 {
+					continue
+				}
+				dp[i][j] = dp[i][j] || dp[i][j-2]
+
+				if pat[j-2] == '.' || pat[j-2] == str[i-1] {
+					dp[i][j] = dp[i][j] || dp[i-1][j-2] || dp[i-1][j]
+				}
+			} else if pat[j-1] == '.' || pat[j-1] == str[i-1] {
+				dp[i][j] = dp[i][j] || dp[i-1][j-1]
+			}
+		}
+	}
+
+	ans = dp[n][m]
+	return
+}
