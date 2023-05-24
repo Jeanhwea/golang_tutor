@@ -17,3 +17,8 @@ func Test_NC0083_02(t *testing.T) {
 	ans := trans(s, len(s))
 	assert.Equal(t, " I H", ans)
 }
+
+func TestNc008301(t *testing.T) {
+	ans := trans("a b", 3)
+	t.Logf("[%v]", ans)
+}
