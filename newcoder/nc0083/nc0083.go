@@ -2,18 +2,25 @@ package nc0083
 
 // 字符串变形
 func trans(s string, n int) (ans string) {
-	sentence, k := make([]byte, n), n-1
-	for i := 0; i < n; i++ {
-		if s[i] != ' ' {
-			continue
+	sentence, i, j, k := make([]byte, n), 0, -1, n-1
+	for {
+		for i < n && s[i] != ' ' {
+			i++
 		}
 
-		for j := i - 1; j >= 0 && s[j] != ' '; j-- {
-			sentence[k] = flip(s[j])
+		for p := i - 1; p > j; p-- {
+			sentence[k] = flip(s[p])
 			k--
 		}
-		sentence[k] = ' '
-		k--
+		j = i
+		if k >= 0 {
+			sentence[k] = ' '
+			k--
+		}
+		i++
+		if i >= n {
+			break
+		}
 	}
 
 	ans = string(sentence)
