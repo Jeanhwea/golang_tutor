@@ -9,12 +9,13 @@ type Interval struct {
 	End   int
 }
 
+// 合并区间
 func merge(intervals []*Interval) (ans []*Interval) {
 	sort.Slice(intervals, func(i, j int) bool {
 		if intervals[i].Start < intervals[j].Start {
 			return true
 		} else if intervals[i].Start == intervals[j].Start {
-			return intervals[i].End == intervals[j].End
+			return intervals[i].End < intervals[j].End
 		}
 		return false
 	})
