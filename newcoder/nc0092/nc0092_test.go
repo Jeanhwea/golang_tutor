@@ -15,3 +15,8 @@ func Test_NC0092_02(t *testing.T) {
 	ans := maxLength([]int{3, 3, 3, 3, 3, 3})
 	assert.Equal(t, 1, ans)
 }
+
+func Test_NC0092_03(t *testing.T) {
+	ans := maxLength([]int{2, 3, 4, 5})
+	assert.Equal(t, 4, ans)
+}

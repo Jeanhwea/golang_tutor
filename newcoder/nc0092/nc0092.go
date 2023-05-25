@@ -2,20 +2,30 @@ package nc0092
 
 // 最长无重复子数组
 func maxLength(nums []int) (ans int) {
-	n := len(nums)
-	exists := make(map[int]bool)
-	for i, j := 0, 0; j < n; j++ {
-		if !exists[nums[j]] {
-			exists[nums[j]] = true
-			if ans < j-i+1 {
-				ans = j - i + 1
+	ok, n := make(map[int]bool), len(nums)
+
+	i, j := 0, 0
+	for {
+		if j < n && ok[nums[j]] {
+			if ans < j-i {
+				ans = j - i
 			}
-			continue
+			for ; nums[i] != nums[j]; i++ {
+				ok[nums[i]] = false
+			}
+			i++
 		}
 
-		for ; nums[i] != nums[j]; i++ {
-			exists[nums[i]] = false
+		if j >= n {
+			if ans < j-i {
+				ans = j - i
+			}
+			break
 		}
+
+		ok[nums[j]] = true
+		j++
 	}
+
 	return
 }
