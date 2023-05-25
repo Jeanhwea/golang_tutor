@@ -11,20 +11,20 @@ func longestCommonPrefix(strs []string) (ans string) {
 	for j := 0; ; j++ {
 		for k := 0; k < n; k++ {
 			if j >= len(strs[k]) {
-				goto done
+				goto DONE
 			} else {
 				if k == 0 {
 					letter = strs[k][j]
 				} else {
 					if strs[k][j] != letter {
-						goto done
+						goto DONE
 					}
 				}
 			}
 		}
 		prefix = append(prefix, letter)
 	}
-done:
+DONE:
 
 	ans = string(prefix)
 	return
