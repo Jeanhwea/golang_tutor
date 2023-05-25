@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// 验证 IP 的有效性
 func solve(s string) (ans string) {
 	if isIpv4(s) {
 		return "IPv4"
