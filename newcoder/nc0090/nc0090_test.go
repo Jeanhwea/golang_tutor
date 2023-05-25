@@ -7,5 +7,12 @@ import (
 )
 
 func Test_NC0090_01(t *testing.T) {
-	assert.Equal(t, true, true)
+	ans := minWindow("XDOYEZODEYXNZ", "XYZ")
+	assert.Equal(t, "YXNZ", ans)
+}
+
+func TestNc009001(t *testing.T) {
+	m := make(map[byte]int)
+	m['a']++
+	t.Log(m)
 }
