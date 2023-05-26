@@ -1,8 +1,10 @@
 package nc0090
 
+import "fmt"
+
 // 最小覆盖字串
 func minWindow(s string, t string) (ans string) {
-	n, m, minLen := len(s), len(t), len(s)+1
+	n, m := len(s), len(t)
 	needCount := make(map[byte]int) // 维护需求的 map
 	for i := 0; i < m; i++ {
 		needCount[t[i]]++
@@ -18,27 +20,31 @@ func minWindow(s string, t string) (ans string) {
 		return true
 	}
 
-	// 使用双指针来遍历 s, 期间维护一个最小覆盖串
-	for i, j := 0, 0; j < n; {
-		if _, ok := needCount[s[j]]; ok {
-			needCount[s[j]]--
+	i, j := 0, 0
+	for {
+		// 窗口扩张
+		for j < n && !covered() {
+			if _, ok := needCount[s[j]]; ok {
+				needCount[s[j]]--
+			}
+			j++
 		}
 
-		for i <= j && covered() {
-			if minLen > j-i+1 {
-				ans, minLen = string(s[i:j+1]), j-i+1
-			}
-			if _, ok := needCount[s[i]]; ok {
-				needCount[s[i]]++
-			}
-			i++
+		if len(ans) == 0 || len(ans) > j-i+1 {
+			ans = string(s[i : j+1])
+			fmt.Printf("ans: %v\n", ans)
 		}
 
-		j++
+		if j >= n {
+			break
+		}
+
+		// 窗口收缩
+		if _, ok := needCount[s[i]]; ok {
+			needCount[s[i]]++
+		}
+		i++
 	}
 
-	if minLen > n {
-		ans = ""
-	}
 	return
 }
