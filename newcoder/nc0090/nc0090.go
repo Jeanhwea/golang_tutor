@@ -1,7 +1,5 @@
 package nc0090
 
-import "fmt"
-
 // 最小覆盖字串
 func minWindow(s string, t string) (ans string) {
 	n, m := len(s), len(t)
@@ -21,7 +19,7 @@ func minWindow(s string, t string) (ans string) {
 	}
 
 	i, j := 0, 0
-	for {
+	for j < n {
 		// 窗口扩张
 		for j < n && !covered() {
 			if _, ok := needCount[s[j]]; ok {
@@ -30,20 +28,17 @@ func minWindow(s string, t string) (ans string) {
 			j++
 		}
 
-		if len(ans) == 0 || len(ans) > j-i+1 {
-			ans = string(s[i : j+1])
-			fmt.Printf("ans: %v\n", ans)
-		}
-
-		if j >= n {
-			break
-		}
-
 		// 窗口收缩
-		if _, ok := needCount[s[i]]; ok {
-			needCount[s[i]]++
+		for i < j && covered() {
+			if len(ans) == 0 || len(ans) > j-i {
+				ans = string(s[i:j])
+			}
+
+			if _, ok := needCount[s[i]]; ok {
+				needCount[s[i]]++
+			}
+			i++
 		}
-		i++
 	}
 
 	return

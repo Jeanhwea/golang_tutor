@@ -16,3 +16,8 @@ func TestNc009001(t *testing.T) {
 	m['a']++
 	t.Log(m)
 }
+
+func TestNc009002(t *testing.T) {
+	s := "abc"
+	t.Log(s[0:1])
+}
