@@ -19,6 +19,7 @@ func minWindow(s, t string) (ans string) {
 		return true
 	}
 
+	// 滑动窗口法计算最小覆盖串
 	i, j := 0, 0
 	for j < n {
 		// 窗口扩张
