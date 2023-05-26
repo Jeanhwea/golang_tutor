@@ -11,6 +11,11 @@ func Test_NC0090_01(t *testing.T) {
 	assert.Equal(t, "YXNZ", ans)
 }
 
+func Test_NC0090_02(t *testing.T) {
+	ans := minWindow("abcAbA", "AA")
+	assert.Equal(t, "AbA", ans)
+}
+
 func TestNc009001(t *testing.T) {
 	m := make(map[byte]int)
 	m['a']++

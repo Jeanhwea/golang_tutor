@@ -1,9 +1,10 @@
 package nc0090
 
 // 最小覆盖字串 - 双指针的滑动窗口算法
-func minWindow(s string, t string) (ans string) {
+func minWindow(s, t string) (ans string) {
 	n, m := len(s), len(t)
-	needCount := make(map[byte]int) // 维护 t 对应字符需求数量的 MAP
+
+	needCount := make(map[byte]int) // 维护 t 对应字符需求数量
 	for i := 0; i < m; i++ {
 		needCount[t[i]]++
 	}
