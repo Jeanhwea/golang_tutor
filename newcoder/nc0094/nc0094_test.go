@@ -7,5 +7,7 @@ import (
 )
 
 func Test_NC0094_01(t *testing.T) {
-	assert.Equal(t, true, true)
+	arr := []int{3, 1, 2, 5, 2, 4}
+	ans := maxWater(arr)
+	assert.Equal(t, int64(5), ans)
 }
