@@ -8,6 +8,6 @@ import (
 
 func Test_NC0094_01(t *testing.T) {
 	arr := []int{3, 1, 2, 5, 2, 4}
-	ans := maxWater(arr)
+	ans := maxWater2(arr)
 	assert.Equal(t, int64(5), ans)
 }
