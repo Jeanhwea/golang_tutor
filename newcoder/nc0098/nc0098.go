@@ -12,9 +12,8 @@ func spiralOrder(matrix [][]int) (ans []int) {
 	}
 
 	visited := [10][10]bool{}
-	dx, dy := []int{0, 1, 0, -1}, []int{1, 0, -1, 0}
-	d := 0
-	for i, j := 0, 0; len(ans) < n*m; {
+	dx, dy, d := []int{0, 1, 0, -1}, []int{1, 0, -1, 0}, 0
+	for i, j := 0, 0; ; {
 		ans = append(ans, matrix[i][j])
 		visited[i][j] = true
 		if len(ans) >= n*m {
