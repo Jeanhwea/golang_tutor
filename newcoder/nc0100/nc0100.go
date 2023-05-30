@@ -42,10 +42,7 @@ func (s *Solution) set(key int, value int) {
 		return
 	}
 
-	newNode := &Entry{
-		Key: key,
-		Val: value,
-	}
+	newNode := &Entry{Key: key, Val: value}
 	s.cache[key] = newNode
 	if len(s.cache) <= s.cap {
 		s.pushFront(newNode)
