@@ -61,7 +61,7 @@ func (l *LFUCache) Set(key, value int) {
 	} else {
 		newEntry := &Entry{Key: key, Val: value, Freq: 1}
 		if newEntry.Freq >= l.minFreq {
-			if h, ok := l.freqHash[newEntry.Freq]; ok {
+			if h, ok1 := l.freqHash[newEntry.Freq]; ok1 {
 				l.nodeHash[key] = h.PushBack(newEntry)
 			} else {
 				newList := list.New()
@@ -103,11 +103,13 @@ func (l *LFUCache) update(ele *list.Element) {
 	if len(l.nodeHash) > l.cap {
 		for {
 			if h, ok := l.freqHash[l.minFreq]; ok {
+				oldest := h.Front().Value.(*Entry)
+				delete(l.nodeHash, oldest.Key)
 				if h.Len() == 1 {
 					delete(l.freqHash, l.minFreq)
 					l.minFreq++
 				} else {
-					h.Remove(h.Back())
+					h.Remove(h.Front())
 				}
 				break
 			}
