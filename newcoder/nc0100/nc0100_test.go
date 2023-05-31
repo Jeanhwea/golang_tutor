@@ -21,3 +21,11 @@ func Test_NC0100_01(t *testing.T) {
 	output = s.get(4)
 	t.Log(output)
 }
+
+func Test_NC0100_02(t *testing.T) {
+	s := Constructor(1)
+	s.set(1, 1)
+	s.set(1, 2)
+	output := s.get(1)
+	t.Log(output)
+}
