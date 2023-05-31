@@ -30,7 +30,7 @@ type LfuCache struct {
 	cap      int
 	minFreq  int
 	freqHash map[int]*list.List    // key: 频率, val: 链表头
-	nodeHash map[int]*list.Element // key: 键,   val: 元素节点
+	dataHash map[int]*list.Element // key: 键,   val: 元素节点
 }
 
 func NewLfuCache(capacity int) *LfuCache {
@@ -38,82 +38,73 @@ func NewLfuCache(capacity int) *LfuCache {
 		cap:      capacity,
 		minFreq:  0,
 		freqHash: make(map[int]*list.List),
-		nodeHash: make(map[int]*list.Element),
+		dataHash: make(map[int]*list.Element),
 	}
 }
 
 func (l *LfuCache) Get(key int) (value int) {
-	if node, ok := l.nodeHash[key]; ok {
+	value = -1
+
+	if node, ok := l.dataHash[key]; ok {
 		e := node.Value.(*Entry)
 		value = e.Val
-		l.update(node)
-	} else {
-		value = -1
+		l.update(node, key, value)
 	}
 	return
 }
 
 func (l *LfuCache) Set(key, value int) {
-	if node, ok := l.nodeHash[key]; ok {
-		e := node.Value.(*Entry)
-		e.Val = value
-		l.update(node)
-	} else {
-		newEntry := &Entry{Key: key, Val: value, Freq: 1}
-		if newEntry.Freq >= l.minFreq {
-			if h, ok1 := l.freqHash[newEntry.Freq]; ok1 {
-				l.nodeHash[key] = h.PushBack(newEntry)
-			} else {
-				newList := list.New()
-				l.nodeHash[key] = newList.PushBack(newEntry)
-				l.freqHash[newEntry.Freq] = newList
-			}
-		}
-	}
-}
-
-func (l *LfuCache) update(ele *list.Element) {
-	if ele == nil {
+	if _, ok := l.dataHash[key]; ok {
+		l.update(l.dataHash[key], key, value)
 		return
 	}
 
-	e := ele.Value.(*Entry)
-	if head, ok := l.freqHash[e.Freq]; ok {
-		// 将元素从旧的列表中移除
-		if head.Len() == 1 {
-			delete(l.freqHash, e.Freq)
-		} else {
-			head.Remove(ele)
+	// key 在 dataHash 里面不存在
+	if len(l.dataHash) >= l.cap { // 如果到达容量, 需要驱逐最不常用的 key
+		lowerList := l.freqHash[l.minFreq]
+		oldestKey := lowerList.Back().Value.(*Entry).Key
+
+		lowerList.Remove(lowerList.Back())
+		if lowerList.Len() == 0 {
+			delete(l.freqHash, l.minFreq)
 		}
 
-		// 尝试添加元素到新的列表中
-		e.Freq++
-		if newHead, found := l.freqHash[e.Freq]; found {
-			newHead.PushBack(e)
-		} else {
-			newList := list.New()
-			newList.PushBack(e)
-			l.freqHash[e.Freq] = newList
-		}
-	} else {
-		panic("element not found!")
+		delete(l.dataHash, oldestKey)
 	}
 
-	// 驱逐多余的元素
-	if len(l.nodeHash) > l.cap {
-		for {
-			if h, ok := l.freqHash[l.minFreq]; ok {
-				oldest := h.Front().Value.(*Entry)
-				delete(l.nodeHash, oldest.Key)
-				if h.Len() == 1 {
-					delete(l.freqHash, l.minFreq)
-					l.minFreq++
-				} else {
-					h.Remove(h.Front())
-				}
-				break
+	// 双写 key 到对应的 hash 表中
+	l.minFreq = 1
+	if _, ok := l.freqHash[1]; !ok {
+		l.freqHash[1] = list.New()
+	}
+
+	if dest, ok := l.freqHash[1]; ok {
+		dest.PushFront(&Entry{Key: key, Val: value, Freq: 1})
+		l.dataHash[key] = dest.Front()
+	}
+}
+
+func (l *LfuCache) update(ele *list.Element, key, value int) {
+	freq := ele.Value.(*Entry).Freq
+
+	if freqList, ok := l.freqHash[freq]; ok {
+		freqList.Remove(ele)
+		if freqList.Len() == 0 {
+			delete(l.freqHash, freq)
+			if l.minFreq == freq {
+				l.minFreq++
 			}
-			l.minFreq++
 		}
+	}
+
+	if _, ok := l.freqHash[freq+1]; !ok {
+		l.freqHash[freq+1] = list.New()
+	}
+
+	if dest, ok := l.freqHash[freq+1]; ok {
+		dest.PushFront(&Entry{Key: key, Val: value, Freq: freq + 1})
+		l.dataHash[key] = dest.Front()
+	} else {
+		panic("update: freq+1 has no list!")
 	}
 }
