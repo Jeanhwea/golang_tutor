@@ -94,9 +94,11 @@ func (l *LfuCache) write(key, value, freq int) {
 	}
 }
 
+// 更新节点
 func (l *LfuCache) update(ele *list.Element, key, value int) {
 	freq := ele.Value.(*Entry).Freq
 
+	// 删除旧的节点
 	if freqList, ok := l.freqHash[freq]; ok {
 		freqList.Remove(ele)
 		if freqList.Len() == 0 {
@@ -107,5 +109,6 @@ func (l *LfuCache) update(ele *list.Element, key, value int) {
 		}
 	}
 
+	// 写入新频率节点
 	l.write(key, value, freq+1)
 }
