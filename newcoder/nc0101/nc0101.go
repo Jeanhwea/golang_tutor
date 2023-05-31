@@ -35,8 +35,10 @@ type LFUCache struct {
 
 func NewLFU(capacity int) LFUCache {
 	return LFUCache{
-		cap:     capacity,
-		minFreq: 0,
+		cap:      capacity,
+		minFreq:  0,
+		freqHash: make(map[int]*list.List),
+		nodeHash: make(map[int]*list.Element),
 	}
 }
 
@@ -52,7 +54,22 @@ func (l *LFUCache) Get(key int) (value int) {
 }
 
 func (l *LFUCache) Set(key, value int) {
-
+	if node, ok := l.nodeHash[key]; ok {
+		e := node.Value.(*Entry)
+		e.Val = value
+		l.update(node)
+	} else {
+		newEntry := &Entry{Key: key, Val: value, Freq: 1}
+		if newEntry.Freq >= l.minFreq {
+			if h, ok := l.freqHash[newEntry.Freq]; ok {
+				l.nodeHash[key] = h.PushBack(newEntry)
+			} else {
+				newList := list.New()
+				l.nodeHash[key] = newList.PushBack(newEntry)
+				l.freqHash[newEntry.Freq] = newList
+			}
+		}
+	}
 }
 
 func (l *LFUCache) update(ele *list.Element) {
@@ -63,9 +80,10 @@ func (l *LFUCache) update(ele *list.Element) {
 	e := ele.Value.(*Entry)
 	if head, ok := l.freqHash[e.Freq]; ok {
 		// 将元素从旧的列表中移除
-		head.Remove(ele)
-		if head.Len() == 0 {
+		if head.Len() == 1 {
 			delete(l.freqHash, e.Freq)
+		} else {
+			head.Remove(ele)
 		}
 
 		// 尝试添加元素到新的列表中
