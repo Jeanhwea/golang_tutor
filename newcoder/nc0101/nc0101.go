@@ -7,7 +7,7 @@ import (
 // 设计 LFU 缓存结构
 func LFU(operators [][]int, k int) (ans []int) {
 	n := len(operators)
-	lfu := NewLFU(k)
+	lfu := NewLfuCache(k)
 	for i := 0; i < n; i++ {
 		switch opt := operators[i][0]; opt {
 		case 1:
@@ -33,8 +33,8 @@ type LfuCache struct {
 	nodeHash map[int]*list.Element // key: 键,   val: 元素节点
 }
 
-func NewLFU(capacity int) LfuCache {
-	return LfuCache{
+func NewLfuCache(capacity int) *LfuCache {
+	return &LfuCache{
 		cap:      capacity,
 		minFreq:  0,
 		freqHash: make(map[int]*list.List),
