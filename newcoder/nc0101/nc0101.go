@@ -26,15 +26,15 @@ type Entry struct {
 }
 
 // 思路: 采用双 hash 表来记录数据
-type LFUCache struct {
+type LfuCache struct {
 	cap      int
 	minFreq  int
 	freqHash map[int]*list.List    // key: 频率, val: 链表头
 	nodeHash map[int]*list.Element // key: 键,   val: 元素节点
 }
 
-func NewLFU(capacity int) LFUCache {
-	return LFUCache{
+func NewLFU(capacity int) LfuCache {
+	return LfuCache{
 		cap:      capacity,
 		minFreq:  0,
 		freqHash: make(map[int]*list.List),
@@ -42,7 +42,7 @@ func NewLFU(capacity int) LFUCache {
 	}
 }
 
-func (l *LFUCache) Get(key int) (value int) {
+func (l *LfuCache) Get(key int) (value int) {
 	if node, ok := l.nodeHash[key]; ok {
 		e := node.Value.(*Entry)
 		value = e.Val
@@ -53,7 +53,7 @@ func (l *LFUCache) Get(key int) (value int) {
 	return
 }
 
-func (l *LFUCache) Set(key, value int) {
+func (l *LfuCache) Set(key, value int) {
 	if node, ok := l.nodeHash[key]; ok {
 		e := node.Value.(*Entry)
 		e.Val = value
@@ -72,7 +72,7 @@ func (l *LFUCache) Set(key, value int) {
 	}
 }
 
-func (l *LFUCache) update(ele *list.Element) {
+func (l *LfuCache) update(ele *list.Element) {
 	if ele == nil {
 		return
 	}
