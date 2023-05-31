@@ -62,13 +62,13 @@ func (l *LFUCache) update(ele *list.Element) {
 
 	e := ele.Value.(*Entry)
 	if head, ok := l.freqHash[e.Freq]; ok {
-		// 将 ele 从旧的列表中移除
+		// 将元素从旧的列表中移除
 		head.Remove(ele)
 		if head.Len() == 0 {
 			delete(l.freqHash, e.Freq)
 		}
 
-		// 尝试添加 ele 到新的列表中
+		// 尝试添加元素到新的列表中
 		e.Freq++
 		if newHead, found := l.freqHash[e.Freq]; found {
 			newHead.PushBack(e)
