@@ -59,28 +59,38 @@ func (l *LfuCache) Set(key, value int) {
 		return
 	}
 
-	// key 在 dataHash 里面不存在
-	if len(l.dataHash) >= l.cap { // 如果到达容量, 需要驱逐最不常用的 key
-		lowerList := l.freqHash[l.minFreq]
-		oldestKey := lowerList.Back().Value.(*Entry).Key
-
-		lowerList.Remove(lowerList.Back())
-		if lowerList.Len() == 0 {
-			delete(l.freqHash, l.minFreq)
-		}
-
-		delete(l.dataHash, oldestKey)
+	if len(l.dataHash) >= l.cap {
+		l.evict()
 	}
 
-	// 双写 key 到对应的 hash 表中
 	l.minFreq = 1
-	if _, ok := l.freqHash[1]; !ok {
-		l.freqHash[1] = list.New()
+	l.write(key, value, l.minFreq)
+}
+
+// 驱逐淘汰的 key
+func (l *LfuCache) evict() {
+	lowerList := l.freqHash[l.minFreq]
+	oldestKey := lowerList.Back().Value.(*Entry).Key
+
+	lowerList.Remove(lowerList.Back())
+	if lowerList.Len() == 0 {
+		delete(l.freqHash, l.minFreq)
 	}
 
-	if dest, ok := l.freqHash[1]; ok {
-		dest.PushFront(&Entry{Key: key, Val: value, Freq: 1})
+	delete(l.dataHash, oldestKey)
+}
+
+// 双写到 hash 表中
+func (l *LfuCache) write(key, value, freq int) {
+	if _, ok := l.freqHash[freq]; !ok {
+		l.freqHash[freq] = list.New()
+	}
+
+	if dest, ok := l.freqHash[freq]; ok {
+		dest.PushFront(&Entry{Key: key, Val: value, Freq: freq})
 		l.dataHash[key] = dest.Front()
+	} else {
+		panic("write empty list!")
 	}
 }
 
@@ -97,14 +107,5 @@ func (l *LfuCache) update(ele *list.Element, key, value int) {
 		}
 	}
 
-	if _, ok := l.freqHash[freq+1]; !ok {
-		l.freqHash[freq+1] = list.New()
-	}
-
-	if dest, ok := l.freqHash[freq+1]; ok {
-		dest.PushFront(&Entry{Key: key, Val: value, Freq: freq + 1})
-		l.dataHash[key] = dest.Front()
-	} else {
-		panic("update: freq+1 has no list!")
-	}
+	l.write(key, value, freq+1)
 }
