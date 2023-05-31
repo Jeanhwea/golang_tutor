@@ -27,8 +27,8 @@ type Entry struct {
 
 // 思路: 采用双 hash 表来记录数据
 type LfuCache struct {
-	cap      int
-	minFreq  int
+	cap      int                   // LFU 的最大容量
+	minFreq  int                   // 当前最小的出现频率值
 	freqHash map[int]*list.List    // key: 频率, val: 链表头
 	dataHash map[int]*list.Element // key: 键,   val: 元素节点
 }
