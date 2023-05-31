@@ -1,6 +1,10 @@
 package nc0101
 
-// 设计LFU缓存结构
+import (
+	"container/list"
+)
+
+// 设计 LFU 缓存结构
 func LFU(operators [][]int, k int) (ans []int) {
 	n := len(operators)
 	lfu := NewLFU(k)
@@ -15,30 +19,81 @@ func LFU(operators [][]int, k int) (ans []int) {
 	return
 }
 
-// 思路: 采用双 hash 表来记录数据
-var (
-	freqHash map[int]*Entry // key: 频率, val: 链表头
-	nodeHash map[int]*Entry // key: 键,   val: 元素节点
-)
-
 type Entry struct {
-	Key  int    // 键
-	Val  int    // 值
-	Freq int    // 频率
-	Next *Entry // 节点下一个指针
+	Key  int // 键
+	Val  int // 值
+	Freq int // 频率
 }
 
+// 思路: 采用双 hash 表来记录数据
 type LFUCache struct {
+	cap      int
+	minFreq  int
+	freqHash map[int]*list.List    // key: 频率, val: 链表头
+	nodeHash map[int]*list.Element // key: 键,   val: 元素节点
 }
 
 func NewLFU(capacity int) LFUCache {
-	return LFUCache{}
+	return LFUCache{
+		cap:     capacity,
+		minFreq: 0,
+	}
 }
 
 func (l *LFUCache) Get(key int) (value int) {
+	if node, ok := l.nodeHash[key]; ok {
+		e := node.Value.(*Entry)
+		value = e.Val
+		l.update(node)
+	} else {
+		value = -1
+	}
 	return
 }
 
 func (l *LFUCache) Set(key, value int) {
 
+}
+
+func (l *LFUCache) update(ele *list.Element) {
+	if ele == nil {
+		return
+	}
+
+	e := ele.Value.(*Entry)
+	if head, ok := l.freqHash[e.Freq]; ok {
+		// 将 ele 从旧的列表中移除
+		head.Remove(ele)
+		if head.Len() == 0 {
+			delete(l.freqHash, e.Freq)
+		}
+
+		// 尝试添加 ele 到新的列表中
+		e.Freq++
+		if newHead, found := l.freqHash[e.Freq]; found {
+			newHead.PushBack(e)
+		} else {
+			newList := list.New()
+			newList.PushBack(e)
+			l.freqHash[e.Freq] = newList
+		}
+	} else {
+		panic("element not found!")
+	}
+
+	// 驱逐多余的元素
+	if len(l.nodeHash) > l.cap {
+		for {
+			if h, ok := l.freqHash[l.minFreq]; ok {
+				if h.Len() == 1 {
+					delete(l.freqHash, l.minFreq)
+					l.minFreq++
+				} else {
+					h.Remove(h.Back())
+				}
+				break
+			}
+			l.minFreq++
+		}
+	}
 }
